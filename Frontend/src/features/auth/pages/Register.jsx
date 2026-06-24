@@ -9,12 +9,18 @@ function Register() {
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [errorMessage, setErrorMessage] = useState("")
     const {loading,handleRegister} = useAuth()
 
     const handleSubmit = async (e)=>{
         e.preventDefault()
-        await handleRegister({username,email,password})
-        navigate("/")
+        setErrorMessage("")
+        const result = await handleRegister({username,email,password})
+        if(result.success){
+            navigate("/")
+        } else {
+            setErrorMessage(result.message)
+        }
     }
     if(loading){
         return (<main><h1>Loading.....</h1></main>)
@@ -27,7 +33,13 @@ function Register() {
 
             <form onSubmit={handleSubmit}>
 
-                <div className="input-group">
+                {errorMessage && (
+                    <div className="form-message form-message--error" role="alert">
+                        {errorMessage}
+                    </div>
+                )}
+
+                <div className={`input-group ${errorMessage ? 'input-group--error' : ''}`}>
                     <label htmlFor="username">Username</label>
                     <input 
                     onChange={(e) => {setUsername(e.target.value)}}
@@ -35,14 +47,14 @@ function Register() {
 
                 </div>
 
-                <div className="input-group">
+                <div className={`input-group ${errorMessage ? 'input-group--error' : ''}`}>
                     <label htmlFor="email">Email</label>
                     <input 
                     onChange={(e) => {setEmail(e.target.value)}}
                     type="email" id='email' name='email' placeholder='Enter email address' />
 
                 </div>
-                <div className="input-group">
+                <div className={`input-group ${errorMessage ? 'input-group--error' : ''}`}>
                     <label htmlFor="password">Password</label>
                     <input 
                     onChange={(e) => {setPassword(e.target.value)}}
@@ -50,7 +62,9 @@ function Register() {
 
                 </div>
 
-                <button className='button primary-button'>Register</button>
+                <button className='button primary-button' disabled={loading}>
+                    {loading ? 'Creating account...' : 'Register'}
+                </button>
 
             </form>
 

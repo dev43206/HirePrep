@@ -1,43 +1,195 @@
-main{
+// main{
+//     min-height: 100vh;
+//     width: 100%;
+
+//     display: flex;
+
+//     justify-content: center;
+//     align-items: center;
+
+//     .form-container{
+//         min-width: 350px;
+
+//         display: flex;
+//         flex-direction: column;
+//         gap: 1rem;
+//     }
+    
+//     form{
+//         display: flex;
+//         flex-direction: column;
+//         gap: 0.75rem;
+//     }
+
+//     .form-message{
+//         padding: 0.75rem 1rem;
+//         border-radius: 0.7rem;
+//         font-size: 0.9rem;
+//         font-weight: 500;
+
+//         &--error{
+//             background-color: rgba(255, 107, 107, 0.15);
+//             color: #ff6b6b;
+//             border: 1px solid rgba(255, 107, 107, 0.35);
+//         }
+//     }
+
+//     .input-group{
+//         display: flex;
+//         flex-direction: column;
+//         gap: 0.5rem;
+
+//         input{
+//             border: 1px solid transparent;
+//             outline: none;
+//             padding-inline: 1rem;
+//             padding-block: 0.75rem;
+//             border-radius: 0.7rem;
+//             transition: border-color 0.2s, box-shadow 0.2s;
+//         }
+
+//         &--error input{
+//             border-color: #ff6b6b;
+//             box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.15);
+//         }
+//     }
+
+//     .button{
+//         cursor: pointer;
+//         padding: 0.8rem 1rem;
+//         border: none;
+//         border-radius: 0.7rem;
+//         font-weight: 600;
+//     }
+
+//     .primary-button {
+//         background-color: rgba(223, 83, 83, 0.808);
+//         color: white;
+//     }
+
+//     .primary-button:disabled {
+//         opacity: 0.7;
+//         cursor: not-allowed;
+//     }
+
+//     a{
+//         color: rgba(223, 83, 83, 0.808);
+//         text-decoration: none;
+
+//     }
+// }
+
+
+
+
+
+
+
+
+main {
     min-height: 100vh;
     width: 100%;
+    padding: 1rem;
 
     display: flex;
-
     justify-content: center;
     align-items: center;
 
-    .form-container{
-        min-width: 350px;
+    .form-container {
+        width: 100%;
+        max-width: 450px;
+        min-width: unset;
 
         display: flex;
         flex-direction: column;
         gap: 1rem;
     }
-    
-    form{
+
+    form {
         display: flex;
         flex-direction: column;
         gap: 0.75rem;
     }
 
-    .input-group{
+    .form-message {
+        padding: 0.75rem 1rem;
+        border-radius: 0.7rem;
+        font-size: 0.9rem;
+        font-weight: 500;
+
+        &--error {
+            background-color: rgba(255, 107, 107, 0.15);
+            color: #ff6b6b;
+            border: 1px solid rgba(255, 107, 107, 0.35);
+        }
+    }
+
+    .input-group {
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
 
-        input{
-            border: none;
+        input {
+            width: 100%;
+            border: 1px solid transparent;
             outline: none;
-            padding-inline: 1rem;
-            padding-block: 0.75rem;
+            padding: 0.75rem 1rem;
             border-radius: 0.7rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        &--error input {
+            border-color: #ff6b6b;
+            box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.15);
         }
     }
 
-    a{
+    .button {
+        width: 100%;
+        cursor: pointer;
+        padding: 0.8rem 1rem;
+        border: none;
+        border-radius: 0.7rem;
+        font-weight: 600;
+        font-size: 1rem;
+    }
+
+    .primary-button {
+        background-color: rgba(223, 83, 83, 0.808);
+        color: white;
+    }
+
+    .primary-button:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+    }
+
+    a {
         color: rgba(223, 83, 83, 0.808);
         text-decoration: none;
+    }
+}
 
+/* Mobile */
+@media (max-width: 480px) {
+    main {
+        padding: 1rem;
+
+        .form-container {
+            max-width: 100%;
+            gap: 0.75rem;
+        }
+
+        .input-group input,
+        .button {
+            padding: 0.7rem 0.9rem;
+            font-size: 0.95rem;
+        }
+
+        .form-message {
+            font-size: 0.85rem;
+        }
     }
 }

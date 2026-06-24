@@ -12,17 +12,19 @@ function Login() {
     
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [errorMessage, setErrorMessage] = useState("")
 
     const navigate = useNavigate()
 
     const handleSubmit = async (e)=>{
         e.preventDefault()
-        const success = await handleLogin({email,password})
-        if(success){
+        setErrorMessage("")
+        const result = await handleLogin({email,password})
+        if(result.success){
             navigate('/')
+        } else {
+            setErrorMessage(result.message)
         }
-        
-
     }
 
     if(loading){
@@ -39,14 +41,20 @@ function Login() {
 
             <form onSubmit={handleSubmit}>
 
-                <div className="input-group">
+                {errorMessage && (
+                    <div className="form-message form-message--error" role="alert">
+                        {errorMessage}
+                    </div>
+                )}
+
+                <div className={`input-group ${errorMessage ? 'input-group--error' : ''}`}>
                     <label htmlFor="email">Email</label>
                     <input 
                     onChange={(e) => {setEmail(e.target.value)}}
                     type="email" id='email' name='email' placeholder='Enter email address' />
 
                 </div>
-                <div className="input-group">
+                <div className={`input-group ${errorMessage ? 'input-group--error' : ''}`}>
                     <label htmlFor="password">Password</label>
                     <input 
                     onChange={(e) => {setPassword(e.target.value)}}
@@ -54,7 +62,9 @@ function Login() {
 
                 </div>
 
-                <button className='button primary-button'>Login</button>
+                <button className='button primary-button' disabled={loading}>
+                    {loading ? 'Logging in...' : 'Login'}
+                </button>
 
             </form>
 
